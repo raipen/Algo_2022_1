@@ -2,39 +2,18 @@
 #include <vector>
 using namespace std;
 
-void binsearch(int n, int& index, int& search_count, vector<int> S)
-{
-    int low, high, mid;
-    low = 0; high = n;
-    index = -1;
-    search_count = 0;
-    while(low<=high && index == -1)
-    {
-        mid = (low+high)/2;
-        if(mid == S[mid]){
-            index = mid;
-        }
-        else if(mid < S[mid]){
-            high = mid-1;
-        }
-        else{
-            low = mid+1;
-        }
-         search_count++;
-    }
+int bs(vector<int> a,int l,int r,int& n){
+    if(l <= r) n++;
+    int m = (l + r) / 2;
+    return (l > r)? -1:(a[m] == m ? m : (a[m] > m ? bs(a, l, m-1, n) : bs(a, m + 1, r, n)));
 }
 
-int main()
-{
-    int n, index, search_count;
-    cin >> n;
-    vector<int> S(n);
-
-    for(int i=0; i<n; i++)
-    {
-        cin >> S[i];
-    }
-    binsearch(n, index, search_count, S);
-    cout << index << endl;
-    cout << search_count << endl;
+int main(void){
+    int size,cnt=0;
+    cin>>size;
+    vector<int> a(size);
+    for(int i=0;i<size;i++)
+        cin>>a[i];
+    cout<<bs(a,0,size-1,cnt)<<"\n"<<cnt<<"\n";
+    return 0;
 }
