@@ -40,8 +40,7 @@ tree_node* makeTree(int i, int j,matrix R, vector<int> key) {
 void preorder(tree_node* cur) {
 	static int i = 0;
 	if (cur) {
-		i++;
-		cout << cur->key<<(i==n?"\n":" ");
+		cout << cur->key<<(++i%n==0?"\n":" ");
 		preorder(cur->left);
 		preorder(cur->right);
 	}
@@ -51,8 +50,7 @@ void inorder(tree_node* cur) {
 	static int i = 0;
 	if (cur) {
 		inorder(cur->left);
-		i++;
-		cout << cur->key<< (i == n ? "\n" : " ");
+		cout << cur->key<< (++i%n==0 ? "\n" : " ");
 		inorder(cur->right);
 	}
 }
@@ -67,14 +65,15 @@ int main() {
 	newMatrix(R, n+2, 0);
 	for (int i = 0; i < n; i++) {
 		for (int j = 1; j <= n- i; j++) {
-			A[j][i + j] = A[j][j - 1] + A[j + 1][i + j] + sum(j, j + i, p);
+			A[j][i + j] = A[j][j - 1] + A[j + 1][i + j];
 			R[j][i + j] = j;
 			for (int k = 1; k <= i; k++) {
-				if (A[j][i + j] > A[j][j + k - 1] + A[j + k + 1][i + j] + sum(j, j + i, p)) {
+				if (A[j][i + j] > A[j][j + k - 1] + A[j + k + 1][i + j]) {
 					R[j][i + j] = j + k;
-					A[j][i + j] = A[j][j + k - 1] + A[j + k + 1][i + j] + sum(j, j + i, p);
+					A[j][i + j] = A[j][j + k - 1] + A[j + k + 1][i + j];
 				}
 			}
+			A[j][i+j] +=sum(j, j + i, p);
 		}
 	}
 	printTriangle(A);
