@@ -19,13 +19,12 @@ void printMatrix(matrix a) {
 matrix prim(int n, matrix W) {
 	matrix F;
 	vector<int> nearst(n + 1,1), distance(n + 1);
-
 	for (int i = 2; i <= n; distance[i] = W[1][i], i++);
 	printNearst(nearst);
 	for (int i = 2; i <= n; i++) {
 		int min_index = 2;
-		for (int j = 3; j <= n; j++) 
-			min_index = (distance[min_index] == -1 ? INF : distance[min_index]) > (distance[j] == -1 ? INF : distance[j]) ? j : min_index;
+		for (int i = 3; i <= n; i++)
+			min_index = distance[min_index]<0||(distance[i]>=0&&distance[min_index] > distance[i]) ? i : min_index;
 		vector<int> temp = { min_index,nearst[min_index],distance[min_index] };
 		F.push_back(temp);
 		distance[min_index] = -1;

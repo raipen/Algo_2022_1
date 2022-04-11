@@ -16,6 +16,11 @@ void printMatrix(matrix a) {
 			cout << a[i][j] << (j == a[i].size() - 1 ? "\n" : " ");
 }
 
+void printPath(int w, vector<int> touch) {
+	if (w != 1) printPath(touch[w], touch);
+	cout << w << " ";
+}
+
 matrix dijkstra(int n, matrix W, vector<int>& touch) {
 	matrix F;
 	vector<long long> distance(n + 1);
@@ -23,13 +28,9 @@ matrix dijkstra(int n, matrix W, vector<int>& touch) {
 	printTouch(touch);
 	int time = n - 1;
 	while (time--) {
-		int min = INF;
-		int min_index;
-		for (int i = 2; i <= n; i++)
-			if (0 <= distance[i] && distance[i] < min) {
-				min_index = i;
-				min = distance[i];
-			}
+		int min_index = 2;
+		for (int i = 3; i <= n; i++)
+			min_index = distance[min_index]<0||(distance[i]>=0&&distance[min_index] > distance[i]) ? i : min_index;
 		vector<int> temp = { touch[min_index],min_index,W[touch[min_index]][min_index] };
 		F.push_back(temp);
 		for (int i = 2; i <= n; i++)
@@ -43,20 +44,13 @@ matrix dijkstra(int n, matrix W, vector<int>& touch) {
 	return F;
 }
 
-void printPath(int w, vector<int> touch) {
-	if (w != 1) printPath(touch[w], touch);
-	cout << w << " ";
-}
-
 int main() {
 	int n, m, u, v, w;
 	cin >> n >> m;
 	newMatrix(W, n + 1, INF);
 	for (int i = 1; i <= n; W[i][i] = 0, i++);
-	while (m--) {
-		cin >> u >> v >> w;
-		W[u][v] = w;
-	}
+	while (m--)
+		cin >> u >> v >> W[u][v];
 	vector<int> touch(n + 1, 1);
 	printMatrix(dijkstra(n, W, touch));
 	cin >> m;

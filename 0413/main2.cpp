@@ -7,7 +7,7 @@ typedef vector<vector<int> > matrix;
 
 void printArr(vector<int> a) {
 	for (int i = 0; i < a.size(); i++)
-			cout << a[i] << (i == a.size() - 1 ? "\n" : " ");
+		cout << a[i] << (i == a.size() - 1 ? "\n" : " ");
 }
 
 int parents(vector<int>& un, int a) {
@@ -20,13 +20,12 @@ bool isGraph(vector<int> un, vector<int> b) {
 
 void Kruskal(int n, matrix W) {
 	vector<int> un(n+1,-1);
-	for (int i = 0,j=1; i < W.size()&&j<n;i++){
+	for (int i = 0,j=1; i < W.size()&&j<n;i++)
 		if (!isGraph(un, W[i])) {
 			printArr(W[i]);
 			un[parents(un,W[i][1])] = parents(un, W[i][0]);
 			j++;
 		}
-	}
 }
 
 bool cmp(vector<int>& v1, vector<int>& v2) {
