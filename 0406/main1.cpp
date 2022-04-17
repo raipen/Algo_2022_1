@@ -15,6 +15,14 @@ string order(int i, int j, matrix P) {
 	return i==j? "(A" + to_string(i)+")": "(" + order(i, P[i][j], P)+order(P[i][j] + 1, j, P) + ")";
 }
 
+string prefix(int i, int j, matrix P) {
+	return i==j? "A" + to_string(i): "*"+prefix(i, P[i][j], P)+prefix(P[i][j] + 1, j, P);
+}
+
+string postfix(int i, int j, matrix P) {
+	return i==j? "A" + to_string(i): postfix(i, P[i][j], P)+postfix(P[i][j] + 1, j, P) + "*";
+}
+
 int main() {
 	int size;
 	cin >> size;
@@ -30,5 +38,7 @@ int main() {
 	printTriangle(P);
 	cout << M[1][size] << endl;
 	cout << order(1, size, P) <<endl;
+	cout << postfix(1, size, P) <<endl;
+	cout << prefix(1, size, P) <<endl;
 	return 0;
 }

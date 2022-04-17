@@ -4,7 +4,7 @@
 
 using namespace std;
 
-int cnt = 0;
+int cnt = 0,cnt2 = 0;
 
 void merge2(vector<int>& S, int l, int m, int r) {
     cnt++;
@@ -25,6 +25,7 @@ void merge2(vector<int>& S, int l, int m, int r) {
 }
 
 void mergesort2(vector<int>& S, int l, int r) {
+    cnt2++;
     if (l < r) {
         int m = (l + r) / 2;
         mergesort2(S, l, m);
@@ -39,7 +40,7 @@ int main(){
     vector<int> S(n);
     for (int i = 0; i < n; i++) cin >> S[i];
     mergesort2(S, 0, n-1);
-    cout<<cnt<<"\n";
+    cout<<cnt<<" "<<cnt2<<"\n";
     for (int i = 0; i < n; i++) cout << S[i]<<" ";
     return 0;
 }
