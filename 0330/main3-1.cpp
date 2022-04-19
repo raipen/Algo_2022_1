@@ -15,8 +15,10 @@ int main() {
 			D[i][j] = D[i-1][path[i][j]] + temp;
 		}
 	}
-	for (int i = 1; i <= N; i++)
+	for (int i = 1; i <= N; i++){
+		cout<<D[N][i]<<" ";
 		m = D[N][m] > D[N][i] ? m : i;
+	}
 	cout << D[N][m]<<endl;
 	vector<int> P(N+1,0);
 	P[N] = m;
