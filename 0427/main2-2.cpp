@@ -1,3 +1,5 @@
+//잘못된 코드
+
 #include <iostream>
 #include <vector>
 #include <map>
@@ -5,7 +7,7 @@
 using namespace std;
 
 typedef struct node* NODE;
-typedef struct node {
+struct node {
     char symbol;
     int frequency;
     NODE l, r;
