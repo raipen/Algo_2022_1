@@ -55,7 +55,7 @@ void knapsack(int i, int w, int p) {
 			bestest.push_back(vindex[asdf]);
 		}
 	}
-	cout << i << " " << w << " " << p << " " << (bound(i, w, p)?bound(i,w,p):bound(i-1,w-item[i][0],p-item[i][1]))<< " " << maxProfit << endl;
+	cout << i << " " << w << " " << p << " " << bound(i, w, p)<< " " << maxProfit << endl;
 
 	if (promising(i, w,p)) {
 		vindex[i + 1] = 1;
